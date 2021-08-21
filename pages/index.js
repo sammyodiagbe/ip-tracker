@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 export default function Home() {
   const [search, setSearchQuery] = useState("");
@@ -48,7 +49,23 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className={styles.mapContainer}></div>
+      <div className={styles.mapContainer}>
+        <MapContainer
+          center={[51.505, -0.09]}
+          zoom={13}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
+      </div>
     </div>
   );
 }
